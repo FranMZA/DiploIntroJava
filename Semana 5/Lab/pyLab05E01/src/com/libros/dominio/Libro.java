@@ -40,7 +40,7 @@ public class Libro {
         this.titulo = titulo;
         this.autor = autor;
         this.isbn = ISBN;
-        this.numPag = numPag > 0 ? numPag : 0;
+        this.numPag = validarPaginas(numPag);
     }
 
     // getters y setters
@@ -73,7 +73,7 @@ public class Libro {
     }
 
     public void setNumPag(int numPag) {
-        this.numPag = numPag;
+        this.numPag = validarPaginas(numPag);
     }
 
     // Métodos
@@ -84,6 +84,10 @@ public class Libro {
                 + "' con ISBN " + isbn
                 + " creado por '" + autor
                 + "' tiene " + numPag + " páginas.";
+    }
+
+    private int validarPaginas(int numPag) {
+        return numPag > 0 ? numPag : 1;
     }
 
 }

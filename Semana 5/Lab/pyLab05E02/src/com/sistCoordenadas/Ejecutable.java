@@ -6,6 +6,7 @@
 package com.sistCoordenadas;
 
 import com.sistCoordenadas.dominio.Punto;
+import java.util.Scanner;
 
 /**
  *
@@ -31,11 +32,27 @@ public class Ejecutable {
             mostrar: su estado,  el cuadrante donde se ubica  y la 
             distancia al origen.
          */
+        Scanner entrada = new Scanner(System.in);
+        
         Punto miPunto = new Punto(5.6f, -4.9f);
         System.out.println("Coordenadas de mi punto: " + miPunto);
 
         System.out.println("Distancia al origen: " + miPunto.distAlOrigen());
         System.out.println(imprimirCuadrante(miPunto));
+
+        System.out.println("--------------------");
+
+        Punto ejemplo = new Punto();
+        System.out.println("Punto por defecto: " + ejemplo);
+        System.out.println("Distancia al origen: " + ejemplo.distAlOrigen());
+        System.out.println(imprimirCuadrante(ejemplo));
+        
+        System.out.println("--------------------");
+        // Punto introducido por el usuario
+        Punto puntoInput = crearPunto(entrada);
+        System.out.println("Punto introducido: " + puntoInput);
+        System.out.println("Distancia al origen: " + puntoInput.distAlOrigen());
+        System.out.println(imprimirCuadrante(puntoInput));
 
     }
 
@@ -46,6 +63,15 @@ public class Ejecutable {
             return "El punto " + punto + " se encuentra en el cuadrante "
                     + punto.cuadrante() + ".";
         }
+    }
+    
+    public static Punto crearPunto(Scanner entrada){
+        System.out.println("Introduzca la coordenada x:");
+        float x = entrada.nextFloat();
+        System.out.println("Introduzca la coordenada y:");
+        float y = entrada.nextFloat();
+        
+        return new Punto(x, y);
     }
 
 }

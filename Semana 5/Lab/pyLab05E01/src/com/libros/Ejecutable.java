@@ -11,7 +11,7 @@ import com.libros.dominio.Libro;
  *
  * @author Franco J. Mulé <franjmule@gmail.com>
  */
-public class ejecutable {
+public class Ejecutable {
 
     /**
      * @param args the command line arguments
