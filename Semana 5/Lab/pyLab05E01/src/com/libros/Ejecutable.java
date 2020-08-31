@@ -40,7 +40,7 @@ public class Ejecutable {
         System.out.println(otroLibro);
 
         System.out.println(calcPaginas(miLibro, otroLibro));
-
+        
     }
 
     public static String calcPaginas(Libro libro1, Libro libro2) {
