@@ -27,9 +27,17 @@ Java. Introduction*/
 Practica/
 **/Teoria
 
+# .properties y .xml
+*.properties
+*.xml
+*.mf
+
 # PDFs
 *.pdf
 /Semana 5/Lab/pyLab05E01/nbproject/private/
 /Semana 5/Lab/pyLab05E02/nbproject/private/
 /Semana 5/Lab/pyLab05E02/build/
 /Semana 5/Lab/pyLab05E01/build/
+/Semana 5/Lab/pyLab05E03/nbproject/private/
+/Semana 5/Lab/pyLab05E04/nbproject/private/
+/Semana 5/Lab/pyLab05E05/nbproject/private/
