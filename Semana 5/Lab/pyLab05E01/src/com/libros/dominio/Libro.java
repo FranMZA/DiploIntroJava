@@ -9,13 +9,11 @@ package com.libros.dominio;
  *
  * @author Franco J. Mulé <franjmule@gmail.com>
  */
-public class Libro {
+public class Libro extends Publicacion {
 
     // Atributos
-    private String titulo;
     private String autor;
     private String isbn;
-    private int numPag;
 
     // Constructores
     /**
@@ -23,9 +21,9 @@ public class Libro {
      * autor: "Desconocido" isbn: "Sin ISBN" numPag: 0
      */
     public Libro() {
-        titulo = autor = "Desconocido";
+        super();
+        autor = "Desconocido";
         isbn = "Sin ISBN";
-        numPag = 0;
     }
 
     /**
@@ -37,21 +35,12 @@ public class Libro {
      * @param numPag int, número de paginas del libro
      */
     public Libro(String titulo, String autor, String ISBN, int numPag) {
-        this.titulo = titulo;
+        super(titulo, numPag);
         this.autor = autor;
         this.isbn = ISBN;
-        this.numPag = validarPaginas(numPag);
     }
 
     // getters y setters
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
     public String getAutor() {
         return autor;
     }
@@ -68,26 +57,13 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public int getNumPag() {
-        return numPag;
-    }
-
-    public void setNumPag(int numPag) {
-        this.numPag = validarPaginas(numPag);
-    }
-
     // Métodos
     @Override
     public String toString() {
         // return "El libro con" + isbn + "creado por '"+ autor + "' tiene 'n' páginas";
-        return "El libro '" + titulo
+        return "El libro '" + this.getTitulo()
                 + "' con ISBN " + isbn
                 + " creado por '" + autor
-                + "' tiene " + numPag + " páginas.";
+                + "' tiene " + this.getNumPag() + " páginas.";
     }
-
-    private int validarPaginas(int numPag) {
-        return numPag > 0 ? numPag : 1;
-    }
-
 }
