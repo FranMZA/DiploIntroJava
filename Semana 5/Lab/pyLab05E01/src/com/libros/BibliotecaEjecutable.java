@@ -40,7 +40,7 @@ public class BibliotecaEjecutable {
         short aux;
         String formato = "%" + (int) (Math.log10(cantPub) + 1) + "d";
         for (int i = 0; i < cantPub; i++) {
-            System.out.println("Libro " + String.format(formato, i + 1) + ":");
+            System.out.println("Publicación " + String.format(formato, i + 1) + ":");
             do {
                 System.out.println("Qué va a cargar?\n"
                         + "1 - Libro\n"
