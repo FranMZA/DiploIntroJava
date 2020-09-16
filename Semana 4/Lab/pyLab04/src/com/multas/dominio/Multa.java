@@ -39,6 +39,7 @@ public class Multa {
 
     @Override
     public String toString(){
-        return "Acta: " + acta + "| Código:" + codigo + "| Monto:" + monto;
+        return "Acta: " + String.format("%03d", acta) + "\t| Código:" 
+                + String.format("%02d", codigo) + "\t| Monto:" + monto;
     }
 }

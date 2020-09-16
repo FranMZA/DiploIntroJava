@@ -5,34 +5,34 @@
  */
 package com.multas.dominio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Franco J. Mulé <franjmule@gmail.com>
  */
 public class Libreta {
 
-    private Multa multas[];
-    private int ultimo;
+    private ArrayList<Multa> multas;
+    // private Multa multas[];
 
     public Libreta() {
-        multas = new Multa[20];
-        ultimo = 0;
-    }
-
-    public Libreta(int cantMultas) {
-        cantMultas = cantMultas > 1 ? cantMultas : -cantMultas;
-        multas = new Multa[cantMultas];
-        ultimo = 0;
+        multas = new ArrayList<Multa>();  // lista vacía de obj Multa
     }
 
     public boolean cargarMulta(Multa multa) {
-        boolean aux = false;
-        if (ultimo <= multas.length) {
-            multas[ultimo] = multa;
-            ultimo++;
-            aux = true;
-        }
-        return aux;
+//        boolean aux = false;
+//        if (ultimo <= multas.length) {
+//            multas[ultimo] = multa;
+//            ultimo++;
+//            aux = true;
+//        }
+//        return aux;
+        if (multas.contains(multa)) {
+            return false;
+        }  // no funciona!!!
+
+        return multas.add(multa);
     }
 
     public float calcularRecaudacion() {
@@ -72,6 +72,21 @@ public class Libreta {
         return "Código más frecuente: " + cod
                 + ", con: " + may + " actas labradas.";
 
+    }
+
+    public String mostrarMultas() {
+        StringBuilder aux = new StringBuilder("");
+        for (Multa multa : multas) {
+            if (multa != null) {
+                aux.append(multa.toString()).append("\n");
+            }
+        }
+
+        if (aux.toString().equals("")) {
+            aux.append("No hay multas cargadas.");
+        }
+
+        return aux.toString();
     }
 
 }

@@ -24,7 +24,7 @@ public class Ejecutable {
             num = entrada.nextInt();
         } while (num <= 0);
 
-        Libreta misMultas = new Libreta(num);
+        Libreta misMultas = new Libreta();
 
         // cargar multas
         int cod, acta;

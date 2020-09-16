@@ -7,13 +7,14 @@ package com.multas.gui;
 
 import com.multas.dominio.Libreta;
 import com.multas.dominio.Multa;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Franco J. Mulé <franjmule@gmail.com>
  */
 public class JDRegistrarMulta extends javax.swing.JDialog {
-
+    
     private Libreta libreta;
 
     /**
@@ -27,6 +28,7 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
             Libreta libreta) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
         this.libreta = libreta;
     }
 
@@ -39,14 +41,17 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtActa = new javax.swing.JTextField();
-        jtCodigo = new javax.swing.JTextField();
         jtMonto = new javax.swing.JTextField();
         jbAceptar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
+        jcbCodigo = new javax.swing.JComboBox<>();
+
+        jFormattedTextField1.setText("jFormattedTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar multa");
@@ -57,6 +62,18 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
         jLabel2.setText("Acta N°:");
 
         jLabel3.setText("Monto:");
+
+        jtActa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtActaKeyTyped(evt);
+            }
+        });
+
+        jtMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtMontoKeyTyped(evt);
+            }
+        });
 
         jbAceptar.setText("Aceptar");
         jbAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +89,8 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
             }
         });
 
+        jcbCodigo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione código", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,15 +104,15 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
                     .addComponent(jbAceptar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jbCancelar))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtMonto)
                             .addComponent(jtActa)
-                            .addComponent(jtCodigo)
-                            .addComponent(jtMonto, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jbCancelar)))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(jcbCodigo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +124,7 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -114,7 +133,7 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar)
                     .addComponent(jbCancelar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -127,24 +146,61 @@ public class JDRegistrarMulta extends javax.swing.JDialog {
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
         int acta, codigo;
         float monto;
-        acta = Integer.parseInt(jtActa.getText());
-        codigo = Integer.parseInt(jtCodigo.getText());
-        monto = Float.parseFloat(jtMonto.getText());
-
+        
+        if (jcbCodigo.getSelectedIndex() > 0) {
+            codigo = Integer.parseInt(jcbCodigo.getSelectedItem().toString());
+        } else {
+            JOptionPane.showMessageDialog(this, "No seleccionó ningún código", 
+                    "Validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (jtActa.getText().equals("") || jtMonto.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, 
+                    "Faltan valores por ingresar", 
+                    "Validación", 
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        } else {
+            acta = Integer.parseInt(jtActa.getText());
+            monto = Float.parseFloat(jtMonto.getText());
+        }
         Multa nuevaMulta = new Multa(codigo, monto, acta);
         boolean exito = libreta.cargarMulta(nuevaMulta);
         
-        this.dispose();
+        if (exito) {
+            JOptionPane.showMessageDialog(this, "Multa registrada!");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo cargar la multa!");
+        }
     }//GEN-LAST:event_jbAceptarActionPerformed
 
+    private void jtActaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtActaKeyTyped
+        validarDigito(evt);
+    }//GEN-LAST:event_jtActaKeyTyped
+
+    private void jtMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtMontoKeyTyped
+        validarDigito(evt);
+    }//GEN-LAST:event_jtMontoKeyTyped
+    
+    private void validarDigito(java.awt.event.KeyEvent evt) {
+        char tecla = evt.getKeyChar();
+        
+        if (!Character.isDigit(tecla)) {
+            evt.consume();
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
+    private javax.swing.JComboBox<String> jcbCodigo;
     private javax.swing.JTextField jtActa;
-    private javax.swing.JTextField jtCodigo;
     private javax.swing.JTextField jtMonto;
     // End of variables declaration//GEN-END:variables
 }
